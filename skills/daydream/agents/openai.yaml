@@ -1,0 +1,4 @@
+interface:
+  display_name: "白日梦 · Daydream"
+  short_description: "从零散记录与外部信号发现跨领域新想法，简短提出，按需深入"
+  default_prompt: "用 $daydream 从现有线索大胆发现几个新想法，做适量公开检索，每个只给简短描述和有用的来源。"

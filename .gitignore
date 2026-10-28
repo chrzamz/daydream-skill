@@ -1,0 +1,16 @@
+.DS_Store
+.jj/
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+.env
+.env.*
+!.env.example
+work/
+outputs/
+.daydream/
+skills-lock.json
+.agents/
+.claude/
+.pytest_cache/
