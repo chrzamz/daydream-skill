@@ -2,6 +2,11 @@
 name: daydream
 description: "Discover bold, cross-domain ideas from conversations, notes, everyday observations, and early public research. Use for idea discovery, content angles, product opportunities, or developing a selected seed. 白日梦：挖掘新想法、选题和机会，简短提出，再按需深入。"
 license: MIT
+compatibility: "Any agent that supports Agent Skills. Web research uses the host's search tools when available. Optional collectors need Python 3.9+; the Apple Notes/Reminders collector needs macOS."
+metadata:
+  author: chrzamz
+  version: "1.0.0"
+  repository: https://github.com/chrzamz/daydream-skill
 ---
 
 # Daydream · 白日梦

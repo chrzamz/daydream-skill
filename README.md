@@ -1,16 +1,28 @@
 # 白日梦 · Daydream
 
+中文 | [English](README.en.md)
+
 **从日常碎片里发现可能，把想法简短说清楚。**
 
-An agent skill for bold, cross-domain idea discovery, grounded in personal context and lightweight public research. Responds in your language. Works with Codex, Claude Code, and other agents that support Agent Skills.
-
-Daydream 从聊天、笔记、提醒、日常观察与外部讨论中寻找连接，提出可供选择的新想法。方向可以是内容、个人 IP、消费产品、工具、服务、业务项目，也可以超出这些分类。
+Daydream 是一个 Agent Skill：从聊天、笔记、提醒、日常观察与外部讨论中寻找连接，提出可供选择的新想法。方向可以是内容、个人 IP、消费产品、工具、服务、业务项目，也可以超出这些分类。适用于 Claude Code、Codex 以及其他支持 Agent Skills 的 Agent，按你使用的语言回复。
 
 它不会默认把讨论变成长篇访谈或体验剧本。默认输出是：**想法标题 + 一两句描述 + 查到的有用线索**。你选中后，再按需要深入。
 
 ## 安装
 
-需要 Node.js **22.20+**。通过 Vercel 的开源 `skills` CLI 安装：
+### 让 Agent 帮你装
+
+把下面这句话发给你正在用的 Agent（Claude Code、Codex、Cursor 等）：
+
+```text
+帮我安装这个 Agent Skill：https://github.com/chrzamz/daydream-skill
+```
+
+Agent 会读取下方的 [For AI agents](#for-ai-agents) 说明，确认安装范围后完成安装。
+
+### 自己用命令装
+
+需要 Node.js **22.20+**。通过 Vercel 的开源 [`skills`](https://github.com/vercel-labs/skills) CLI 安装：
 
 ```sh
 npx skills add chrzamz/daydream-skill --skill daydream
@@ -19,18 +31,53 @@ npx skills add chrzamz/daydream-skill --skill daydream
 全局安装到 Codex 和 Claude Code：
 
 ```sh
-npx skills add chrzamz/daydream-skill --skill daydream -g -a codex -a claude-code
+npx skills add chrzamz/daydream-skill --skill daydream -g -a codex claude-code
 ```
 
-查看仓库中的 Skill、列出已安装技能，或更新已安装版本：
+查看仓库中的 Skill、列出已安装技能、更新或移除：
 
 ```sh
 npx skills add chrzamz/daydream-skill --list
 npx skills list -g
 npx skills update daydream -g
+npx skills remove daydream -g
 ```
 
 也可以把 [`skills/daydream`](skills/daydream) 整个目录放进宿主支持的技能目录。启动新会话或按宿主方式刷新技能后使用。
+
+## For AI agents
+
+> This section is written for coding agents. If a user sent you this repository URL and asked you to install it, follow these steps.
+
+This repository contains one skill, `daydream`, at [`skills/daydream/`](skills/daydream). It has no required runtime dependencies.
+
+1. **Confirm the scope.** Unless the user already said so, ask once: install globally (all projects, `-g`) or only in the current project? Do not guess.
+2. **Choose target agents.** Use your own agent id, such as `claude-code`, `codex`, `cursor`, `gemini-cli`, `opencode`, or `github-copilot`. Add other agents only if the user asks. Full list: [supported agents](https://github.com/vercel-labs/skills#supported-agents).
+3. **Install with the skills CLI** (Node.js 22.20+):
+
+   ```sh
+   # current project
+   npx skills add chrzamz/daydream-skill --skill daydream -a <agent-id> -y
+
+   # global
+   npx skills add chrzamz/daydream-skill --skill daydream -a <agent-id> -g -y
+   ```
+
+   `-a` accepts several ids, for example `-a claude-code codex`. Do not use `--all`.
+
+4. **Without Node.js**, copy the folder instead:
+
+   ```sh
+   git clone --depth 1 https://github.com/chrzamz/daydream-skill /tmp/daydream-skill
+   cp -R /tmp/daydream-skill/skills/daydream <skills-dir>/daydream
+   ```
+
+   `<skills-dir>` is your agent's skills directory, for example `.claude/skills` (project) or `~/.claude/skills` (global) for Claude Code, and `.agents/skills` or `~/.agents/skills` for Codex.
+
+5. **Verify.** Run `npx skills list` (add `-g` for global) and confirm `daydream` is listed, or check that `<skills-dir>/daydream/SKILL.md` exists.
+6. **Tell the user how to start.** They may need a new session or a skills reload. Then try `/daydream` in Claude Code, `$daydream` in Codex, or simply ask for new ideas.
+
+Installation only places the skill files. Do not run the bundled Python scripts, read the user's notes or chat history, create scheduled tasks, or ask for accounts or API keys as part of installing.
 
 ## 怎么用
 
